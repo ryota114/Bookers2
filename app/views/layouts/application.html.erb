@@ -4,26 +4,86 @@
     <title>Bookers2</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://kit.fontawesome.com/1d4b351902.js" crossorigin="anonymous"></script>
   </head>
 
-  <body>
-    <!--ヘッダー-->
+  <body class="d-flex flex-column vh-100">
+    <!--ヘッダーclassでヘッダー部分に影をつけている-->
     <header>
-      <% if user_signed_in? %>
-      <li>
-        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-      </li>
-    <% else %>
-      <li>
-        <%= link_to "新規登録", new_user_registration_path %>
-      </li>
-      <li>
-        <%= link_to "ログイン", new_user_session_path %>
-      </li>
-    <% end %>
+      <!--ハンバーガー(レスポンシブ)の折り畳みと配色(暗い背景用の文字色),bgで背景色-->
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <!--Bootstrapのcontainer指定-->
+        <div class="container">
+          <!--pはpadding,上下左右に適用-->
+          <a class="navbar-brand p-3" href="/">Bookers</a>
+          <!--ハンバーガーアイコン部分、spanは三本線-->
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <!--開く前に隠す部分collapse,idは任意で、上記のdata-taegetに#[id]は必須-->
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+              <!--ユーザーのサインイン・アウトによる分岐-->
+              <% if user_signed_in? %>
+              <!--do endを用いてfontawesomeアイコンと文字を表示する方法-->
+              <li class="nav-item">
+                <%= link_to user_path(current_user.id), class: 'nav-link' do %>
+                  <i class="fas fa-home"></i>
+                  Home
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to users_path, class: 'nav-link' do %>
+                  <i class="fas fa-users"></i>
+                  Users
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to books_path, class: 'nav-link' do %>
+                  <i class="fas fa-book-open"></i>
+                  Books
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link' do %>
+                  <i class="fas fa-sign-out-alt"></i>
+                  logout
+                <% end %>
+              </li>
+              <% else %>
+              <li class="nav-item">
+                <%= link_to "/", class: 'nav-link' do %>
+                  <i class="fas fa-link"></i>
+                  Home
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to about_home_path, class: 'nav-link' do %>
+                  <i class="fas fa-link"></i>
+                  About
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to new_user_registration_path, class: 'nav-link' do %>
+                  <i class="fas fa-user-plus"></i>
+                  sign up
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to new_user_session_path, class: 'nav-link' do %>
+                  <i class="fas fa-sign-in-alt"></i>
+                  login
+                <% end %>
+              </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
     </header>
     <!--/ヘッダー-->
     <%= yield %>
