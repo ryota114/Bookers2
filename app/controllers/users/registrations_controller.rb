@@ -60,13 +60,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #  super(resource)
   #end
 
-  # アカウント登録後のリダイレクト先 
+  # アカウント登録後のリダイレクト先
   def after_sign_up_path_for(resource)
     user_path(resource)
   end
 
   # アカウント編集後のリダイレクト先
   def after_update_path_for(resource)
+    user_path(resource)
+  end
+
+  # ログイン後のリダイレクト先 ログインした状態でsignupをしたらリダイレクトする
+  def after_sign_in_path_for(resource)
     user_path(resource)
   end
 end
