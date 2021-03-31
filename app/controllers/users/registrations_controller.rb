@@ -60,7 +60,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #  super(resource)
   #end
 
-  # アカウント登録後のリダイレクト先 https://qiita.com/Tatty/items/a9759755e562ac4693ec
+  # アカウント登録後のリダイレクト先 
   def after_sign_up_path_for(resource)
     user_path(resource)
   end
