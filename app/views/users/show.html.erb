@@ -3,7 +3,7 @@
     <div class="row">
       <!--UserInfo部分テンプレート-->
       <div class="col-md-3">
-        <%= render "users/user_info", user: @user, profile_image: @profile_image, book: @book %>
+        <%= render "users/user_info", user: @user, book: @book %>
       </div>
       <!--右側のBooks部分-->
       <div class="col-md-8 offset-md-1">
@@ -18,11 +18,15 @@
               <th colspan="3"></th>
             </tr>
           </thead>
-          <!--投稿した本のデータ数だけ繰り返す-->
+          <!--投稿した指定ユーザーの本のデータ数だけ繰り返す-->
           <tbody>
             <% @books.each do |books| %>
             <tr>
-              <td><%= attachment_image_tag @user, :profile_image, :fill, 10, 10, fallback: "no_image.jpg",size: "30x30" %></td>
+              <td>
+                <%= link_to user_path(@user) do %>
+                  <%= attachment_image_tag @user, :profile_image, :fill, 10, 10, fallback: "no_image.jpg",size: "30x30" %>
+                <% end %>
+              </td>
               <td><%= link_to books.title, book_path(books.id) %></td>
               <td><%= books.body %></td>
             </tr>

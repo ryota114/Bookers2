@@ -5,7 +5,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @profile_image = current_user.profile_image
     @book = Book.new
     # 指定userが投稿したbookのみをbooksに入れる
     @books = @user.books
