@@ -3,6 +3,8 @@
     <div class="row">
       <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
         <h1>User info</h1>
+        <!--バリデーションエラー表示、users#update-->
+        <%= render "layouts/error_messages", object: @user %>
         <%= form_with model:@user, local:true do |f| %>
           <div class="form-group">
             <label for="user_name">Name</label><br />

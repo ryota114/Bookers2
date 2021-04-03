@@ -1,0 +1,12 @@
+<% if object.errors.any? %>
+  <div class="alert">
+    <ul>
+      <!--エラー件数カウント-->
+      <h3><%= object.errors.count %> errors prohibited this obj from being saved:<h3>
+      <!--エラー内容の繰り返し表示-->
+      <% object.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
