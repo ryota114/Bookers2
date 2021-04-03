@@ -86,7 +86,10 @@
       </nav>
     </header>
 
-    <%= yield %>
+    <body>
+      <%= render "layouts/notification" %>
+      <%= yield %>
+    </body>
 
     <footer>
       <!--mt-5 上側のマージンを3rem-->

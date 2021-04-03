@@ -1,1 +1,35 @@
-<h1>book/show</h1>
+<main>
+  <div class="container px-5 px-sm-0">
+    <div class="row">
+      <!--UserInfo部分テンプレート-->
+      <div class="col-md-3">
+        <%= render "users/user_info", user: @user, book: @book %>
+      </div>
+      <!--右側のBook detail部分-->
+      <div class="col-md-8 offset-md-1">
+        <h2>Book detail</h2>
+        <table class="table table-hover">
+          <!--|ユーザー画像|title|opinion|edit|destroy|-->
+          <tbody>
+            <tr>
+              <td>
+                <!--遷移先はBook_detailに入っているuser_id-->
+                <%= link_to user_path(@book_detail.user_id) do %>
+                  <!--book.userで各Bookに保存されているuserをインスタンスとして指定-->
+                  <%= attachment_image_tag @book_detail.user, :profile_image, :fill, 10, 10, fallback: "no_image.jpg",size: "30x30" %><br />
+                  <%= @book_detail.user.name %>
+                <% end %>
+              </td>
+              <td><%= link_to @book_detail.title, book_path(@book_detail.id) %></td>
+              <td><%= @book_detail.body %></td>
+              <% if @book_detail.user == current_user %>
+                <td><%= link_to "Edit", edit_book_path(@book_detail.id), class: "btn btn-sm btn-success" %></td>
+                <td><%= link_to "Destroy", book_path(@book_detail.id), method: :delete, data: { confirm: "本当に消しますか？" }, class: "btn btn-sm btn-danger" %></td>
+              <% end %>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
